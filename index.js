@@ -20,6 +20,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send("Hello World");
+});
 app.post('/createForm', async (req, res) => {
     try {
         const { formTitle, formDescription, questions } = req.body;
@@ -74,127 +77,7 @@ app.get('/getForm/:_id', async (req, res) => {
     }
 });
 
-// app.post('/register', async (req, res) => {
-//     try {
-//         const { username, email, password } = req.body;
-//         // console.log(username, email, password);
-//         const userFound = await User.findOne({ email });
-//         if (userFound) {
-//             res.status(400).json({ Error: "User already exists" });
-//         }
-//         else {
-//             const user = new User({ username, email, password });
-//             await user.save()
-//                 .then(() => {
-//                     // console.log("ZA WARUDO");
-//                     res.status(200).json({ Success: "User Created", id: user._id });
-//                 })
-//                 .catch((err) => {
-//                     res.status(400).json({ Error: "Error adding user" });
-//                 });
-//         }
 
-//     }
-//     catch (error) {
-//         // console.log(error);
-//         return res.status(400).json({ Error: "Error Occured" });
-//     }
-// });
-
-// app.post('/login', async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-//         // console.log(email, password);
-//         const userFound = await User.findOne({ email });
-//         if (userFound && userFound.password == password) {
-//             res.status(200).json({ Success: userFound.username, id: userFound._id });
-//         }
-//         else {
-//             res.status(400).json({ Error: "Doesn't exist" });
-//         };
-//     }
-//     catch (error) {
-//         // console.log(error);
-//         return res.status(400).json({ Error: "Error Occured" });
-//     }
-// });
-
-// app.post('/postTodo', async (req, res) => {
-//     try {
-//         const { todo, author } = req.body;
-//         // console.log(todo, author);
-//         const user = new Todo({ todo, author });
-//         await user.save()
-//             .then(() => {
-//                 // console.log("ZA WARUDO");
-//                 res.status(200).json({ Success: "Task Added To The List" });
-//             })
-//             .catch((err) => {
-//                 res.status(400).json({ Error: "Error adding task" });
-//             });
-
-//     }
-//     catch (error) {
-//         // console.log(error);
-//         return res.status(400).json({ Error: "Error Occured" });
-//     }
-// });
-
-// app.post('/getTodo', async (req, res) => {
-//     try {
-//         const { author } = req.body;
-//         const todoFound = await Todo.find({ author });
-//         if (todoFound) {
-//             res.status(200).json({ Success: todoFound });
-//         }
-//         else {
-//             res.status(400).json({ Error: "Doesn't exist" });
-//         };
-//     }
-//     catch (error) {
-//         // console.log(error);
-//         return res.status(400).json({ Error: "Error Occured" });
-//     }
-// });
-
-// app.put('/updateTodo/:_id', async (req, res) => {
-//     try {
-//         const { _id } = req.params;
-//         // console.log(_id);
-//         const { todo, isCompleted } = req.body;
-//         const todoUpdate = await Todo.findByIdAndUpdate(_id, { todo, isCompleted }, { new: true });
-//         // console.log(todoUpdate);
-//         if (todoUpdate) {
-//             res.status(200).json({ Success: 'Update Successful' });
-//         }
-//         else {
-//             res.status(400).json({ Error: "Doesn't exist" });
-//         };
-//     }
-//     catch (error) {
-//         // console.log(error);
-//         return res.status(400).json({ Error: "Error Occured" });
-//     }
-// });
-
-// app.delete('/deleteTodo/:_id', async (req, res) => {
-//     try {
-//         const _id = new ObjectId(req.params._id);
-//         // console.log(_id);
-//         const deleted = await Todo.deleteOne(_id).populate("_id");
-//         // console.log(deleted);
-//         if (deleted['acknowledged']) {
-//             res.status(200).json({ Success: 'Update Successful' });
-//         }
-//         else {
-//             res.status(400).json({ Error: "Doesn't exist" });
-//         };
-//     }
-//     catch (error) {
-//         // console.log(error);
-//         return res.status(400).json({ Error: "Error Occured" });
-//     }
-// });
 connectDb()
     .then((result) => { return app.listen(port, () => { console.log(`The server is up and running on port ${port}`) }) })
     .catch((error) => { return error });
