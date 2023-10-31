@@ -4,12 +4,15 @@ const formSchema = mongoose.Schema({
     formTitle: {
         type: String,
     },
+    formImg: {
+        type: String,
+    },
     formDescription: {
         type: String,
         default: 'none',
     },
     questions: {
-        type: [{ question: { type: String }, type: { type: String }, quests: { type: Array } }],
+        type: [{ question: { type: String }, questImg: { type: String }, type: { type: String }, quests: { type: Array } }],
     },
 })
 
