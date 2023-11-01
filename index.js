@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 });
 app.post('/createForm', async (req, res) => {
     try {
-        const { formTitle, formDescription, questions } = req.body;
+        const { formTitle, formDescription, formImg, questions } = req.body;
         // console.log(formTitle, formDescription, questions);
         const form = new Form({ formTitle, formDescription, questions });
         await form.save()
